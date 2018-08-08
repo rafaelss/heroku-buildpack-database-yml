@@ -4,6 +4,6 @@ ENV_DIR=$3
 
 app_env=$(cat $ENV_DIR/RAILS_ENV)
 
-printf "$app_env:\n  url: <%%= ENV[\"DATABASE_URL\"] %%>\n  encoding: \"utf-8\"\n  schema_search_path: \"public, common, extensions\"" > $BUILD_DIR/config/database.yml.test
+printf "$app_env:\n  encoding: \"utf-8\"\n  schema_search_path: \"public, common, extensions\"" > $BUILD_DIR/config/database.yml
 
 exit 0
