@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+BUILD_DIR=$1
+
+echo "$RAILS_ENV:\n  url: <%= ENV[\"DATABASE_URL\"] %>\n  encoding: \"utf-8\"\n  schema_search_path: \"public, common, extensions\"" > $BUILD_DIR/config/database.yml
+
+exit 0
