@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 BUILD_DIR=$1
 
-ls -lsa $2/
+ls -lsa $3/
 
 app_env=$(cat $2/RAILS_ENV)
 
