@@ -2,8 +2,23 @@
 BUILD_DIR=$1
 ENV_DIR=$3
 
-app_env=$(cat $ENV_DIR/RAILS_ENV)
+test -f $ENV_DIR/RAILS_ENV || exit 0
 
-printf "$app_env:\n  encoding: \"utf-8\"\n  schema_search_path: \"public, common, extensions\"" > $BUILD_DIR/config/database.yml
+app_env=$(cat $ENV_DIR/RAILS_ENV)
+printf "$app_env:\n  encoding: \"utf-8\"" > $BUILD_DIR/config/database.yml
+
+if [ -f $ENV_DIR/DATABASE_SEARCH_PATH ]; then
+  search_path=$(cat $ENV_DIR/DATABASE_SEARCH_PATH)
+  if [ "$search_path" != "" ]; then
+    printf "\n  schema_search_path: \"$search_path\"" >> $BUILD_DIR/config/database.yml
+  fi
+fi
+
+if [ -f $ENV_DIR/DATABASE_ADAPTER ]; then
+  adapter=$(cat $ENV_DIR/DATABASE_ADAPTER)
+  if [ "$adapter" != "" ]; then
+    printf "\n  adapter: \"$adapter\"" >> $BUILD_DIR/config/database.yml
+  fi
+fi
 
 exit 0
