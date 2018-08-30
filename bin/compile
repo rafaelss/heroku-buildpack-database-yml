@@ -21,4 +21,11 @@ if [ -f $ENV_DIR/DATABASE_ADAPTER ]; then
   fi
 fi
 
+if [ -f $ENV_DIR/DATABASE_POOL ]; then
+  pool=$(cat $ENV_DIR/DATABASE_POOL)
+  if [ "$pool" != "" ]; then
+    printf "\n  pool: \"$pool\"" >> $BUILD_DIR/config/database.yml
+  fi
+fi
+
 exit 0
