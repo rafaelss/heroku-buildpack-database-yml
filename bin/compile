@@ -36,6 +36,4 @@ if [ -f $ENV_DIR/DATABASE_POSTGIS ]; then
   fi
 fi
 
-cat $BUILD_DIR/config/database.yml
-
 exit 0
