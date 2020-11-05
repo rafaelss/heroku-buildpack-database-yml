@@ -28,4 +28,12 @@ if [ -f $ENV_DIR/DATABASE_POOL ]; then
   fi
 fi
 
+if [ -f $ENV_DIR/DATABASE_POSTGIS ]; then
+  postgis=$(cat $ENV_DIR/DATABASE_POSTGIS)
+  if [ "$postgis" == "true" ]; then
+    url=`echo $DATABASE_URL | sed s/postgres/postgis/g`
+    printf "\n  url: \"$url\"" >> $BUILD_DIR/config/database.yml
+  fi
+fi
+
 exit 0
